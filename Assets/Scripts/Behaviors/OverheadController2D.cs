@@ -53,7 +53,7 @@ public class OverheadController2D : MonoBehaviour
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;
     public float maxClimbAngle = 50f;
-    public float xDrag = 10f;
+    public float xDrag = 1000f;
     public float xBounceFactor = 0.0f;
     public float attackTimeout = .1f;
     public bool makeAttackChild = false;
@@ -410,6 +410,13 @@ public class OverheadController2D : MonoBehaviour
         {
             myAnimator.SetFloat("ActiveYVel", activeYVel);
             myAnimator.SetFloat("ActiveXVel", Mathf.Abs(activeXVel));
+            if (activeXVel < 0.0) {
+                myRenderer.flipX = true;
+            }
+            if (activeXVel > 0.0)
+            {
+                myRenderer.flipX = false;
+            }
         }
     }
 
