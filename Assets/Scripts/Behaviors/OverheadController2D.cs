@@ -59,6 +59,9 @@ public class OverheadController2D : MonoBehaviour
     public bool makeAttackChild = false;
     public bool blockEnemies = false;
 
+    public bool leftRightAnimations = true;
+    public bool upDownAnimations = true;
+
     private bool isEnabled;
     private int framesHorizontalCol = 0;
     private int framesVerticalCol = 0;
@@ -408,14 +411,22 @@ public class OverheadController2D : MonoBehaviour
     void UpdateAnimator() {
         if (myAnimator)
         {
-            myAnimator.SetFloat("ActiveYVel", activeYVel);
-            myAnimator.SetFloat("ActiveXVel", Mathf.Abs(activeXVel));
-            if (activeXVel < 0.0) {
-                myRenderer.flipX = true;
-            }
-            if (activeXVel > 0.0)
+            if (upDownAnimations)
             {
-                myRenderer.flipX = false;
+                myAnimator.SetFloat("ActiveYVel", activeYVel);
+            }
+
+            if (leftRightAnimations)
+            {
+                myAnimator.SetFloat("ActiveXVel", Mathf.Abs(activeXVel));
+                if (activeXVel < 0.0)
+                {
+                    myRenderer.flipX = true;
+                }
+                if (activeXVel > 0.0)
+                {
+                    myRenderer.flipX = false;
+                }
             }
         }
     }
