@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9293806}
   - component: {fileID: 12473592}
   - component: {fileID: 8109686}
+  - component: {fileID: 114243616718501266}
   m_Layer: 0
   m_Name: NoFollowCamera
   m_TagString: MainCamera
@@ -104,3 +105,22 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 196460}
   m_IsPrefabAsset: 1
+--- !u!114 &114243616718501266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AssetsPPU: 1
+  m_RefResolutionX: 320
+  m_RefResolutionY: 180
+  m_UpscaleRT: 0
+  m_PixelSnapping: 1
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0
