@@ -106,7 +106,7 @@ MonoBehaviour:
   speed: 100
   horizontalRayCount: 4
   verticalRayCount: 4
-  jumpVelocity: 4
+  jumpVelocity: 6
   maxClimbAngle: 50
   xDrag: 10000
   xBounceFactor: 0

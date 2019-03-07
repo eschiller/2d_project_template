@@ -48,14 +48,14 @@ public class PlatformerController2D : MonoBehaviour
     public float activeXVel = 0.0f;
     public float activeYVel = 0.0f;
 
-    public float gravity = -.05f;
+    public float gravity = -15f;
     public float skinWidth = .03f;
-    public float speed = 50f;
+    public float speed = 100f;
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;
-    public float jumpVelocity = .2f;
+    public float jumpVelocity = 4f;
     public float maxClimbAngle = 50f;
-    public float xDrag = 10f;
+    public float xDrag = 10000f;
     public float xBounceFactor = 0.0f;
     public int bonusJumps = 1;
 
