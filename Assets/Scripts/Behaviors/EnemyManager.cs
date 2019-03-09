@@ -16,7 +16,7 @@ public class EnemyManager : CharacterManager {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.transform.tag == "Player") {
+        if (other.transform.tag == "Player" && (health > 0)) {
             other.gameObject.GetComponent<CharacterManager>().LoseHealth(touchDamange);
         }
     }
