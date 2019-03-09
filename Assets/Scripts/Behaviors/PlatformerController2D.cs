@@ -365,7 +365,7 @@ public class PlatformerController2D : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         velocity.y *= Time.timeScale;
 
-        if (isDucking) {
+        if (isDucking && canJump) {
             activeXVel = 0f;
         }
 
