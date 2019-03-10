@@ -22,13 +22,20 @@ public class PlayerManager : CharacterManager
     public override void LoseHealth(int loss)
     {
         health -= loss;
-        myHUDMgr.SetHealth(this.health);
+        if (myHUDMgr != null)
+        {
+            myHUDMgr.SetHealth(this.health);
+        }
     }
 
 
     public override void GainHealth(int gain)
     {
         health += gain;
-        myHUDMgr.SetHealth(this.health);
+
+        if (myHUDMgr != null)
+        {
+            myHUDMgr.SetHealth(this.health);
+        }
     }
 }
