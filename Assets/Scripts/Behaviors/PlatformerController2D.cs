@@ -34,6 +34,11 @@
  * to be set to the IgnoreRaycase layer, or probably the better option is to set
  * per-project settings of Edit -> Project Settings -> Queries start in 
  * colliders to "off".
+ * 
+ * For platforms or walls to "collide" correctly (block the object using this 
+ * controller script), then must have BoxCollider2d components, and must be 
+ * tagged either "platform", or "passthrough_platform", if you should be able to
+ * jump through the platform from below.
  */
 
 using UnityEngine;
@@ -58,6 +63,8 @@ public class PlatformerController2D : MonoBehaviour
     public float xDrag = 10000f;
     public float xBounceFactor = 0.0f;
     public int bonusJumps = 1;
+
+    public bool debugMessages = false;
 
     private bool isEnabled;
     private int framesHorizontalCol = 0;
@@ -260,6 +267,9 @@ public class PlatformerController2D : MonoBehaviour
             hit = Physics2D.Raycast(rayOriginVert + Vector2.right * verticalRaySpacing * i, rayDirectionVert, Mathf.Abs(rayDistanceVert));
             if (hit)
             {
+                if (debugMessages) {
+                    Debug.Log("vert hit " + hit);
+                }
                 //tracks how many continuous cycles we've had vertical collisions for.
                 //This isn't actually used for anything, but could hypothecally be used
                 //for vertical bounces as we currently have for horizontal bounces.
@@ -311,6 +321,10 @@ public class PlatformerController2D : MonoBehaviour
 
             if (hit)
             {
+                if (debugMessages)
+                {
+                    Debug.Log("horz hit " + hit);
+                }
                 //Tracks how many contiguous cycles we've had horizontal collisions. 
                 //This is used to handle horizontal bounces (the only happen if there's
                 //no active x velocity on the first time a wall is hit).

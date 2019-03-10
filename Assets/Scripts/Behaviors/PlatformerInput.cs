@@ -30,7 +30,6 @@ public class PlatformerInput : MonoBehaviour {
 
         if (jumping)
         {
-            Debug.Log("Space is down");
             myPlatformerPhysics.Jump();
         }
 
