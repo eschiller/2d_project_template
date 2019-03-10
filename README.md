@@ -13,3 +13,14 @@ To use GameManager only mode, check the "Initialize Players and Cams" box in the
 To use the LevelManager, only check "Initialize Players and Cams" in the LevelManager (or create them in the scene itself).
 
 Regardless of which is chosen, the "First Scene" variable must also be populated in the inspector.
+
+
+## Creating a new NPC
+
+To create a new NPC, like a new enemy, do the following:
+
+ * Create a game object with sprites/animations (specific animation states that are looked for by the controller are discussed in controller documentation).
+ * Add one of the "Manager" scripts, likely either EnemyManager or CharacterManager
+ * To add phsyics, add one of the Controller2d script components.
+ * To add behavior, add one of the FSM components.
+ * If the NPC is an enemy, give it the "Enemy" tag. This will help with battle/damage logic.
