@@ -103,12 +103,12 @@ public class PlatformerController2D : MonoBehaviour
     {
         if (isEnabled)
         {
-            MoveSprite();
             UpdateRaycastOrigins();
             UpdateVelocity();
             UpdateAnimator();
             checkVerticalCollisions();
             checkHorizontalCollisions();
+            MoveSprite();
         }
     }
 
@@ -186,12 +186,16 @@ public class PlatformerController2D : MonoBehaviour
             velocity.y = jumpVelocity;
             myAnimator.SetBool("isJumping", true);
             canJump = false;
+            UpdateVelocity();
+            checkVerticalCollisions();
         } else if (canJump && isDucking) {
             isDownJumping = true;
             Invoke("UnDownJump", .2f);
         } else if (remainingJumps > 0) {
             velocity.y = jumpVelocity;
             remainingJumps -= 1;
+            UpdateVelocity();
+            checkVerticalCollisions();
         }
     }
 
