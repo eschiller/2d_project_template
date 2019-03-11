@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using GameUtils;
 
 
 public class CharacterManager : MonoBehaviour {
 
     public int health = 3;
+    public float invulnerableTime = 1.0f;
+
+    public bool isVulnerable = true;
     private bool isDead = false;
 
     protected SpriteRenderer myRenderer;
@@ -31,7 +34,9 @@ public class CharacterManager : MonoBehaviour {
     public virtual void LoseHealth (int loss) {
         Debug.Log("health is " + health);
         health -= loss;
-        StartCoroutine("flashRed");
+        MakeInvulnerable();
+        StartCoroutine(SpriteEffects.BlinkSprite(transform.GetComponent<SpriteRenderer>()));
+        Invoke("MakeVulnerable", invulnerableTime);
     }
 
 
@@ -51,6 +56,7 @@ public class CharacterManager : MonoBehaviour {
 
 
     public IEnumerator flashRed() {
+        Debug.Log("in flash red");
         for (int i = 0; i < 4; i++) {
             GetComponent<SpriteRenderer>().color = Color.red;
             yield return new WaitForSeconds(0.1f);
@@ -61,5 +67,14 @@ public class CharacterManager : MonoBehaviour {
 
     public void SetTargetTransform(Transform t) {
         targetTransform = t;
+    }
+
+    protected void MakeVulnerable() {
+        isVulnerable = true;
+    }
+
+    protected void MakeInvulnerable()
+    {
+        isVulnerable = false;
     }
 }

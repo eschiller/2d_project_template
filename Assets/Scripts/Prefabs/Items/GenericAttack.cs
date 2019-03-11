@@ -27,7 +27,7 @@ public class GenericAttack : MonoBehaviour {
     {
         Debug.Log("In attack collision stay.");
         Debug.Log("target tag is " + other.transform.tag);
-        if (other.transform.tag == "Enemy")
+        if (other.transform.tag == "Enemy" && other.gameObject.GetComponent<CharacterManager>().isVulnerable)
         {
             Debug.Log("collide with target");
             other.gameObject.GetComponent<CharacterManager>().LoseHealth(attackDamage);

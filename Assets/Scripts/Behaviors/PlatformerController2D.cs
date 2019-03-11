@@ -490,8 +490,11 @@ public class PlatformerController2D : MonoBehaviour
 
 
     void resizeColliderY(float newScale=1f) {
-        Debug.Log("old offset" + myCollider.offset);
-        Debug.Log("old size " + myCollider.size);
+        if (debugMessages)
+        {
+            Debug.Log("old offset" + myCollider.offset);
+            Debug.Log("old size " + myCollider.size);
+        }
 
         float newSizeY = myCollider.size.y * newScale;
         float newOffsetY = (myCollider.size.y - newSizeY) / 2;
@@ -499,7 +502,10 @@ public class PlatformerController2D : MonoBehaviour
         myCollider.size = new Vector2(myCollider.size.x, newSizeY);
         myCollider.offset = new Vector2(myCollider.offset.x, myCollider.offset.y - newOffsetY);
 
-        Debug.Log("new offset" + myCollider.offset);
-        Debug.Log("new size " + myCollider.size);
+        if (debugMessages)
+        {
+            Debug.Log("new offset" + myCollider.offset);
+            Debug.Log("new size " + myCollider.size);
+        }
     }
 }

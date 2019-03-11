@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EnemyManager : CharacterManager {
     public int touchDamange = 1;
 
@@ -16,7 +17,8 @@ public class EnemyManager : CharacterManager {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.transform.tag == "Player" && (health > 0)) {
+        Debug.Log("Blob hit " + other);
+        if (other.transform.tag == "Player" && (health > 0) && other.gameObject.GetComponent<CharacterManager>().isVulnerable) {
             other.gameObject.GetComponent<CharacterManager>().LoseHealth(touchDamange);
         }
     }

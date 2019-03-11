@@ -21,7 +21,7 @@ public class PlayerManager : CharacterManager
 
     public override void LoseHealth(int loss)
     {
-        health -= loss;
+        base.LoseHealth(loss);
         if (myHUDMgr != null)
         {
             myHUDMgr.SetHealth(this.health);
@@ -31,7 +31,7 @@ public class PlayerManager : CharacterManager
 
     public override void GainHealth(int gain)
     {
-        health += gain;
+        base.GainHealth(gain);
 
         if (myHUDMgr != null)
         {
