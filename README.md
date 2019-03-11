@@ -19,7 +19,7 @@ Regardless of which is chosen, the "First Scene" variable must also be populated
 
 To create a new NPC, like a new enemy, do the following:
 
- * Create a game object with sprites/animations (specific animation states that are looked for by the controller are discussed in controller documentation).
+ * Create a game object with sprites/animations (specific animation states that are looked for by the controller are discussed in controller documentation). Give it BoxCollider2d and Rigidbody2d components, being sure to check "Is Trigger" in the collider, and check "simulated" in the rigidbody.
  * Add one of the "Manager" scripts, likely either EnemyManager or CharacterManager
  * To add phsyics, add one of the Controller2d script components.
  * To add behavior, add one of the FSM components.
