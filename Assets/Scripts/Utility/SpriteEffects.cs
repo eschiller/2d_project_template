@@ -42,5 +42,38 @@ namespace GameUtils
                 yield return new WaitForSeconds(blinkSpeed);
             }
         }
+
+
+
+        public static IEnumerator FlashRed(SpriteRenderer sr, float duration = 1.0f, float blinkSpeed = .05f)
+        {
+            int reps = (int)(duration / blinkSpeed);
+
+            Debug.Log("in flash red");
+            for (int i = 0; i < reps; i++)
+            {
+                sr.GetComponent<SpriteRenderer>().color = Color.red;
+                yield return new WaitForSeconds(blinkSpeed);
+                sr.GetComponent<SpriteRenderer>().color = Color.white;
+                yield return new WaitForSeconds(blinkSpeed);
+            }
+        }
+
+
+
+        public static IEnumerator Fade(SpriteRenderer sr)
+        {
+            for (float f = 1f; f >= 0; f -= 0.1f)
+            {
+                Color c = sr.material.color;
+                c.a = f;
+                sr.material.color = c;
+                yield return new WaitForSeconds(.1f);
+            }
+
+            Color c1 = sr.material.color;
+            c1.a = 0.0f;
+            sr.material.color = c1;
+        }
     }
 }

@@ -49,20 +49,8 @@ public class CharacterManager : MonoBehaviour {
         //set animation for death
         isDead = true;
         Destroy(gameObject, .40f);
-        //InvokeRepeating("FlipRenderer", 0.0f, .08f);
         Debug.Log("about to set animation to dead");
         GetComponent<Animator>().SetBool("isDead", true);
-    }
-
-
-    public IEnumerator flashRed() {
-        Debug.Log("in flash red");
-        for (int i = 0; i < 4; i++) {
-            GetComponent<SpriteRenderer>().color = Color.red;
-            yield return new WaitForSeconds(0.1f);
-            GetComponent<SpriteRenderer>().color = Color.white;
-            yield return new WaitForSeconds(0.1f);
-        }
     }
 
     public void SetTargetTransform(Transform t) {
