@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using GameUtils;
 
 public class EnemyManager : CharacterManager {
     public int touchDamange = 1;
@@ -14,6 +14,20 @@ public class EnemyManager : CharacterManager {
         myCollider = GetComponent<BoxCollider2D>();
 	}
 
+
+    public override void LoseHealth(int loss)
+    {
+        base.LoseHealth(loss);
+        StartCoroutine(CameraEffects.ShakeCamera(GameObject.FindWithTag("MainCamera")));
+
+    }
+
+
+    public override void GainHealth(int gain)
+    {
+        base.GainHealth(gain);
+
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
