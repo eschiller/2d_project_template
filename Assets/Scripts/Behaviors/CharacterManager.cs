@@ -36,7 +36,6 @@ public class CharacterManager : MonoBehaviour {
         health -= loss;
         MakeInvulnerable();
         StartCoroutine(SpriteEffects.BlinkSprite(transform.GetComponent<SpriteRenderer>()));
-        StartCoroutine(CameraEffects.ShakeCamera(GameObject.FindWithTag("MainCamera")));
         Invoke("MakeVulnerable", invulnerableTime);
     }
 

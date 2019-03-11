@@ -20,23 +20,17 @@ namespace GameUtils
             for (int i = 0; i < reps; i++)
             {
 
-                Debug.Log("Rep " + i);
                 //first see if it's the last rep. if it is, make the sprite visible
                 if (i == (reps - 1))
                 {
-                    Debug.Log("changing color to " + original_color);
                     sr.color = original_color;
                 }
                 else if (sr.color == original_color)
                 {
-                    Debug.Log("changing color to " + clear_color);
-
                     sr.color = clear_color;
                 }
                 else
                 {
-                    Debug.Log("changing color to " + original_color);
-
                     sr.color = original_color;
                 }
                 yield return new WaitForSeconds(blinkSpeed);
@@ -49,7 +43,6 @@ namespace GameUtils
         {
             int reps = (int)(duration / blinkSpeed);
 
-            Debug.Log("in flash red");
             for (int i = 0; i < reps; i++)
             {
                 sr.GetComponent<SpriteRenderer>().color = Color.red;
