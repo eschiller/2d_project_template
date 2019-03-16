@@ -6,6 +6,7 @@ public class PlatformerInput : MonoBehaviour {
     float directionInputX, directionInputY;
     public PlatformerController2D myPlatformerPhysics;
     bool jumping;
+    bool unJumping;
     bool hasItem;
     bool action1;
 
@@ -20,6 +21,7 @@ public class PlatformerInput : MonoBehaviour {
         directionInputX = Input.GetAxisRaw("Horizontal");
         directionInputY = Input.GetAxisRaw("Vertical");
         jumping = Input.GetButtonDown("Jump");
+        unJumping = Input.GetButtonUp("Jump");
         action1 = Input.GetButtonDown("Fire1");
 
         if (directionInputY < -.3f) {
@@ -31,6 +33,11 @@ public class PlatformerInput : MonoBehaviour {
         if (jumping)
         {
             myPlatformerPhysics.Jump();
+        }
+
+        if (unJumping)
+        {
+            myPlatformerPhysics.ReleaseJump();
         }
 
         if (action1) {
