@@ -58,7 +58,7 @@ public class PlatformerController2D : MonoBehaviour
     public float speed = 100f;
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;
-    public float jumpVelocity = 4f;
+    public float jumpVelocity = 2f;
     public float maxClimbAngle = 50f;
     public float xDrag = 10000f;
     public float xBounceFactor = 0.0f;
@@ -203,6 +203,13 @@ public class PlatformerController2D : MonoBehaviour
             remainingJumps -= 1;
             UpdateVelocity();
             checkVerticalCollisions();
+        }
+    }
+
+
+    public void ReleaseJump(){
+        if (velocity.y > (jumpVelocity / 2)) {
+            velocity.y = velocity.y * .5f;
         }
     }
 
