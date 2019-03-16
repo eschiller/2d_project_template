@@ -49,6 +49,7 @@ using System.Collections;
 public class PlatformerController2D : MonoBehaviour
 {
     public GameObject genericAttack;
+    public Item heldItem;
 
     public float activeXVel = 0.0f;
     public float activeYVel = 0.0f;
@@ -60,7 +61,8 @@ public class PlatformerController2D : MonoBehaviour
     public int verticalRayCount = 4;
     public float jumpVelocity = 2f;
     public float maxClimbAngle = 50f;
-    public float xDrag = 10000f;
+    public float groundDrag = 10000f;
+    public float airDrag = 10000f;
     public float xBounceFactor = 0.0f;
     public int bonusJumps = 1;
 
@@ -246,6 +248,10 @@ public class PlatformerController2D : MonoBehaviour
      * from that object.
      */
     public void Attack() {
+        if (heldItem != null) {
+            heldItem.GetComponent<Item>().UseItem();
+        }
+
         if (genericAttack != null) {
             GameObject attackObject = Instantiate(genericAttack, CalculateItemSpawnLocation(), Quaternion.identity);
             attackObject.GetComponent<SpriteRenderer>().flipX = myRenderer.flipX;
@@ -408,7 +414,12 @@ public class PlatformerController2D : MonoBehaviour
             }
             else
             {
-                horizontalSpeed -= (Time.deltaTime * xDrag);
+                if (canJump)
+                {
+                    horizontalSpeed -= (Time.deltaTime * groundDrag);
+                } else {
+                    horizontalSpeed -= (Time.deltaTime * airDrag);
+                }
                 if (horizontalSpeed < 0.0f) {
                     horizontalSpeed = 0.0f;
                 }
@@ -515,4 +526,61 @@ public class PlatformerController2D : MonoBehaviour
             Debug.Log("new size " + myCollider.size);
         }
     }
+
+
+    public bool grabItem()
+    {
+        Bounds bounds = myCollider.bounds;
+        float length = bounds.size.x * 2.0f;
+
+        int grabRayCount = 24;
+        float raySpacing = bounds.size.y / grabRayCount;
+
+        //project the rays and see if we get a hit
+        Vector2 rayOriginHoriz, rayDirectionHoriz;
+        RaycastHit2D hit;
+        rayOriginHoriz = (myRenderer.flipX ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft);
+        //rayDirectionHoriz = (myRenderer.flipX ? Vector2.left : Vector2.right);
+
+        for (int i = 0; i < grabRayCount; i++)
+        {
+            if (debugMessages)
+            {
+                Debug.DrawRay(rayOriginHoriz + Vector2.up * raySpacing * i, raycastOrigins.bottomRight * length, Color.red);
+                Debug.DrawRay(rayOriginHoriz + Vector2.up * raySpacing * i, raycastOrigins.bottomLeft * length, Color.red);
+            }
+            hit = Physics2D.Raycast(rayOriginHoriz + Vector2.up * raySpacing * i, raycastOrigins.bottomRight, length);
+            hit = Physics2D.Raycast(rayOriginHoriz + Vector2.up * raySpacing * i, raycastOrigins.bottomLeft, length);
+
+
+            if (hit)
+            {
+                if (hit.collider.gameObject.tag == "Item")
+                {
+                    Debug.Log("got an item!");
+                    heldItem = hit.collider.gameObject.GetComponent<Item>();
+                    heldItem.grabItem(transform);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public void throwItem()
+    {
+        Vector2 dir;
+        if (myRenderer.flipX)
+        {
+            dir = Vector2.left;
+        }
+        else
+        {
+            dir = Vector2.right;
+        }
+        heldItem.throwItem(dir);
+    }
+
+
 }

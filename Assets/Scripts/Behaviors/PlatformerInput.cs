@@ -43,6 +43,26 @@ public class PlatformerInput : MonoBehaviour {
         if (action1) {
             myPlatformerPhysics.Attack();
         }
+
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("KEY DOWN E");
+            if (hasItem)
+            {
+                Debug.Log("threw item in input");
+                myPlatformerPhysics.throwItem();
+                hasItem = false;
+            }
+            else
+            {
+                if (myPlatformerPhysics.grabItem())
+                {
+                    Debug.Log("grabbed item in input");
+                    hasItem = true;
+                }
+            }
+        }
         myPlatformerPhysics.setActiveXVel(directionInputX);
     }
 }
