@@ -5,6 +5,8 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public Transform ownerObject;
+    public float throwspeed = 400;
+    public float throwheight = 5.0f;
 
     PlatformerController2D pControl;
 
@@ -33,6 +35,12 @@ public class Item : MonoBehaviour
         Debug.Log("throwing item");
         ownerObject = null;
         pControl.enable();
-        pControl.setActiveXVel(2.0f * direction.x);
+        pControl.setActiveXVel(1f *  direction.x);
+        pControl.speed = throwspeed;
+        pControl.setYVel(throwheight);
+    }
+
+    public void UseItem() {
+
     }
 }
