@@ -184,6 +184,17 @@ public class PlatformerController2D : MonoBehaviour
     }
 
 
+    public void setYVel(float newyvel) {
+        velocity.y = newyvel;
+    }
+
+
+    public void setXVel(float newxvel)
+    {
+        velocity.x = newxvel;
+    }
+
+
     /*
     * Checks that there are currently lower vertical collisions (grounded, via
     * the canJump var), and if there are "jumps" via one time y-velocity add.
@@ -267,7 +278,7 @@ public class PlatformerController2D : MonoBehaviour
         Vector2 rayDirectionVert, rayOriginVert;
 
         float rayDistanceVert;
-        RaycastHit2D hit ;
+        RaycastHit2D [] hits ;
         bool hadVertHit = false;
 
 
@@ -277,21 +288,21 @@ public class PlatformerController2D : MonoBehaviour
         for (int i = 0; i < verticalRayCount; i++)
         {
             Debug.DrawRay(rayOriginVert + Vector2.right * verticalRaySpacing * i, rayDirectionVert * Mathf.Abs(rayDistanceVert), Color.red);
-            hit = Physics2D.Raycast(rayOriginVert + Vector2.right * verticalRaySpacing * i, rayDirectionVert, Mathf.Abs(rayDistanceVert));
-            if (hit)
+            hits = Physics2D.RaycastAll(rayOriginVert + Vector2.right * verticalRaySpacing * i, rayDirectionVert, Mathf.Abs(rayDistanceVert));
+            for (int k = 0; k < hits.Length; k ++)
             {
                 if (debugMessages) {
-                    Debug.Log("vert hit " + hit);
+                    Debug.Log("vert hit " + hits[k]);
                 }
                 //tracks how many continuous cycles we've had vertical collisions for.
                 //This isn't actually used for anything, but could hypothecally be used
                 //for vertical bounces as we currently have for horizontal bounces.
-                hadVertHit = true;
-                if ((hit.collider.gameObject.tag == "platform") ||
-                    ((hit.collider.gameObject.tag == "passthrough_platform") && (rayDirectionVert == Vector2.down) && !isDownJumping))
+                if ((hits[k].collider.gameObject.tag == "platform") ||
+                    ((hits[k].collider.gameObject.tag == "passthrough_platform") && (rayDirectionVert == Vector2.down) && !isDownJumping))
                 {
-                    velocity.y = (hit.distance - skinWidth) * rayDirectionVert.y;
-                    rayDistanceVert = hit.distance;
+                    hadVertHit = true;
+                    velocity.y = (hits[k].distance - skinWidth) * rayDirectionVert.y;
+                    rayDistanceVert = hits[k].distance;
 
                     //set canJump if we're moving down and there are vertical hits
                     if (rayDirectionVert == Vector2.down)
@@ -414,7 +425,7 @@ public class PlatformerController2D : MonoBehaviour
             }
             else
             {
-                if (canJump)
+                if (framesVerticalCol > 1)
                 {
                     horizontalSpeed -= (Time.deltaTime * groundDrag);
                 } else {
@@ -537,7 +548,7 @@ public class PlatformerController2D : MonoBehaviour
         float raySpacing = bounds.size.y / grabRayCount;
 
         //project the rays and see if we get a hit
-        Vector2 rayOriginHoriz, rayDirectionHoriz;
+        Vector2 rayOriginHoriz;
         RaycastHit2D hit;
         rayOriginHoriz = (myRenderer.flipX ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft);
         //rayDirectionHoriz = (myRenderer.flipX ? Vector2.left : Vector2.right);
