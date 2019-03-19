@@ -65,6 +65,7 @@ public class PlatformerController2D : MonoBehaviour
     public float airDrag = 10000f;
     public float xBounceFactor = 0.0f;
     public int bonusJumps = 1;
+    public bool canJump = false;
 
     public bool debugMessages = false;
 
@@ -72,7 +73,6 @@ public class PlatformerController2D : MonoBehaviour
     private int framesHorizontalCol = 0;
     private int framesVerticalCol = 0;
 
-    bool canJump = false;
     bool isDucking = false;
     bool isDownJumping = false;
     private int remainingJumps;
