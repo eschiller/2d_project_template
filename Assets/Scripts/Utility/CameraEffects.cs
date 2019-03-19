@@ -8,11 +8,14 @@ namespace GameUtils
     {
 
         public static IEnumerator ShakeCamera(GameObject cam, float duration = .2f,
-                                              float shakeUpdateInterval = .02f, int shakeRadius = 5)
+                                              float shakeUpdateInterval = .02f, int shakeRadius = 1)
         {
             float runningTime = 0.0f;
             float runningShakeTime = 0.0f;
+            float cameraCurrentX = cam.transform.position.x;
+            float cameraCurrentY = cam.transform.position.y;
             float cameraCurrentZ = cam.transform.position.z;
+
 
             System.Random rnd;
             rnd = new System.Random();
@@ -36,6 +39,10 @@ namespace GameUtils
 
                 yield return null;
             }
+
+            cam.transform.position = new Vector3(cameraCurrentX, cameraCurrentY, cameraCurrentZ);
         }
+
+
     }
 }
