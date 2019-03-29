@@ -261,9 +261,7 @@ public class PlatformerController2D : MonoBehaviour
     public void Attack() {
         if (heldItem != null) {
             heldItem.GetComponent<Item>().UseItem();
-        }
-
-        if (genericAttack != null) {
+        } else if (genericAttack != null) {
             GameObject attackObject = Instantiate(genericAttack, CalculateItemSpawnLocation(), Quaternion.identity);
             attackObject.GetComponent<SpriteRenderer>().flipX = myRenderer.flipX;
             attackObject.transform.SetParent(transform, true);
@@ -285,6 +283,10 @@ public class PlatformerController2D : MonoBehaviour
         rayDirectionVert = (velocity.y <= 0 ? Vector2.down : Vector2.up);
         rayOriginVert = (velocity.y <= 0 ? raycastOrigins.bottomLeft : raycastOrigins.topLeft);
         rayDistanceVert = (Mathf.Abs(velocity.y) + skinWidth) * rayDirectionVert.y;
+        if (debugMessages)
+        {
+            Debug.Log("raydistancevert is " + rayDistanceVert);
+        }
         for (int i = 0; i < verticalRayCount; i++)
         {
             Debug.DrawRay(rayOriginVert + Vector2.right * verticalRaySpacing * i, rayDirectionVert * Mathf.Abs(rayDistanceVert), Color.red);
@@ -307,6 +309,10 @@ public class PlatformerController2D : MonoBehaviour
                     //set canJump if we're moving down and there are vertical hits
                     if (rayDirectionVert == Vector2.down)
                     {
+                        if (debugMessages)
+                        {
+                            Debug.Log("collided with" + hits[k].collider.gameObject.name + ", setting canjump back to true");
+                        }
                         canJump = true;
                         if (myAnimator)
                         {

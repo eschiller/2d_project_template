@@ -126,6 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  invulnerableTime: 1
+  isVulnerable: 1
   targetTransform: {fileID: 0}
 --- !u!114 &114647161064442280
 MonoBehaviour:

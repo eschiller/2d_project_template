@@ -47,7 +47,6 @@ public class PlatformerInput : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("KEY DOWN E");
             if (hasItem)
             {
                 Debug.Log("threw item in input");
