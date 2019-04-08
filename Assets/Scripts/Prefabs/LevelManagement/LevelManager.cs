@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour {
     public GameObject p2coopcam;
     public bool cameraFollowsPlayer = false;
 
-    public GameManager gameMgr;
+    public GameObject gameMgr;
 
     private GameObject cam1;
     private GameObject cam2;
@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour {
             this.InitPlayersAndCams();
         }
 
-        gameMgr = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameMgr = GameObject.Find("GameManager");
 
     }
 
@@ -69,10 +69,7 @@ public class LevelManager : MonoBehaviour {
         //Simple win state of checking of all enemies are dead
         if (GameObject.FindGameObjectsWithTag("Player").Length == 0)
         {
-            if (gameMgr != null)
-            {
-                gameMgr.LoseGame();
-            }
+            Debug.Log("You lose");
         }
     }
 

@@ -6,16 +6,17 @@ using UnityEngine;
 
 public class PlayerManager : CharacterManager
 {
-    GameManager myGameMgr;
     HUDManager myHUDMgr;
 
     // Use this for initialization
     void Start()
     {
         myRenderer = GetComponent<SpriteRenderer>();
-        myGameMgr = GameObject.Find("GameManager").GetComponent<GameManager>();
-        myHUDMgr = myGameMgr.getHUDManager();
-        myHUDMgr.SetHealth(this.health);
+        GameObject myHUDMgrObject = GameObject.Find("HUDManager");
+        if (myHUDMgrObject != null)
+        {
+            myHUDMgr.SetHealth(this.health);
+        }
     }
 
 

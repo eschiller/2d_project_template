@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 4538821792637464}
   - component: {fileID: 114105391469186998}
   m_Layer: 0
-  m_Name: DialogManager
+  m_Name: DialogManager 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

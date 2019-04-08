@@ -10,6 +10,9 @@ public class CharacterManager : MonoBehaviour {
     public float invulnerableTime = 1.0f;
 
     public bool isVulnerable = true;
+    public GameObject dialog;
+
+
     private bool isDead = false;
 
     protected SpriteRenderer myRenderer;
@@ -64,5 +67,15 @@ public class CharacterManager : MonoBehaviour {
     protected void MakeInvulnerable()
     {
         isVulnerable = false;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Debug.Log("In npc collision");
+        if ((Input.GetKeyDown(KeyCode.E)) && (collision.gameObject.tag == "Player") && (dialog != null))
+        {
+            GameObject mylog = Instantiate(dialog);
+            mylog.transform.SetParent(transform);
+        }
     }
 }
