@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 4538821792637464}
   - component: {fileID: 114105391469186998}
   m_Layer: 0
-  m_Name: DialogManager 1
+  m_Name: BlobNagaLog1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,7 +148,6 @@ MonoBehaviour:
   portraits:
   - {fileID: 0}
   - {fileID: 0}
-  nextDialog: {fileID: 0}
 --- !u!114 &114673798642121830
 MonoBehaviour:
   m_ObjectHideFlags: 1
