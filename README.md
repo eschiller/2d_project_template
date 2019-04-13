@@ -18,12 +18,3 @@ Documentation for specific asset types has been broken into READMEs in their con
  * [Level Managemnet] (https://github.com/eschiller/2d_project_template/tree/master/Assets/Scripts/Prefabs/LevelManagement)
  * [HUD Management] (https://github.com/eschiller/2d_project_template/tree/master/Assets/Scripts/Prefabs/HUDManagement)
 
-## Creating a new NPC
-
-To create a new NPC, like a new enemy, do the following:
-
- * Create a game object with sprites/animations (specific animation states that are looked for by the controller are discussed in controller documentation). Give it BoxCollider2d and Rigidbody2d components, being sure to check "Is Trigger" in the collider, and check "simulated" in the rigidbody.
- * Add one of the "Manager" scripts, likely either EnemyManager or CharacterManager
- * To add phsyics, add one of the Controller2d script components.
- * To add behavior, add one of the FSM components.
- * If the NPC is an enemy, give it the "Enemy" tag. This will help with battle/damage logic.
